@@ -35,3 +35,17 @@ def load_operations_instances(operations):
         if operation
     ]
 
+
+def executed_operations(operations):
+    """
+    Возвращает список выполненых операций
+    :param operations:
+    :return:
+    """
+    return [
+        operation
+        for operation in operations
+        if operation.state == "EXECUTED"
+    ]
+
+
