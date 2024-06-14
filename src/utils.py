@@ -49,3 +49,10 @@ def executed_operations(operations):
     ]
 
 
+def sort_operations_by_date(operations):
+    """
+    Сортирует список операций по дате
+    :param operations:
+    :return:
+    """
+    return sorted(operations, reverse=True)
