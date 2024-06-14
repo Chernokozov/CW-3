@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Operation:
     def __init__(
             self,
@@ -26,3 +29,17 @@ class Operation:
         self.description = description
         self.from_account = from_account
         self.to_account = to_account
+
+    def get_iso_date(self):
+        """
+        Получает дату и возвращает её в формате ISO
+        """
+        return datetime.fromisoformat(self.date)
+
+    def conversion_date(self):
+        """
+        Конвертирует дату к приведённому образцу дд.мм.ГГГГ
+        :return:
+        """
+        iso_date = self.get_iso_date()
+        return iso_date.strftime("%d.%m.%Y")

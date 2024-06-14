@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+from settings import OPERATION_PATH
 from src.operations import Operation
 
 
@@ -24,10 +25,10 @@ def load_operations_instances(operations):
         Operation(
             date=operation["date"],
             state=operation["state"],
-            amount=operation["amount"],
-            currency_name=operation["currency_name"],
+            amount=operation["operationAmount"]["amount"],
+            currency_name=operation["operationAmount"]["currency"]["name"],
             description=operation["description"],
-            from_account=operation["from"],
+            from_account=operation.get("from", ""),
             to_account=operation["to"]
         )
         for operation in operations
