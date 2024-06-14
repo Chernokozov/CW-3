@@ -1,7 +1,5 @@
 import json
-from pathlib import Path
 
-from settings import OPERATION_PATH
 from src.operations import Operation
 
 
