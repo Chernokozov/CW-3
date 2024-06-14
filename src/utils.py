@@ -34,3 +34,4 @@ def load_operations_instances(operations):
         for operation in operations
         if operation
     ]
+

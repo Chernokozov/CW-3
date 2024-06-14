@@ -43,3 +43,51 @@ class Operation:
         """
         iso_date = self.get_iso_date()
         return iso_date.strftime("%d.%m.%Y")
+
+    def masking_payment_information(self, payment_info, from_account=""):
+        """
+        Получает и маскирует платёжную информацию
+        :param payment_info:
+        :param from_account:
+        :return:
+        """
+        if len(payment_info) > 6:
+            if payment_info.startswith("Счет"):
+                masked_part = payment_info[:4] + " **" + payment_info[-4:]
+                return masked_part
+            else:
+                masked_part_2 = payment_info[:-12] + " " + payment_info[-12:-10] + "** **** " + payment_info[-4:]
+                return masked_part_2
+
+        return from_account
+
+    def __gt__(self, other):
+        """
+        Сравнивает даты операций
+        :param other:
+        :return:
+        """
+        return self.get_iso_date() > other.get_iso_date()
+
+    def __lt__(self, other):
+        """
+        Сравнивает даты операций
+        :param other:
+        :return:
+        """
+        return self.get_iso_date() < other.get_iso_date()
+
+    def __str__(self):
+        """
+        Выводит пользовательскую информацию в заданном виде
+        :return:
+        """
+        date = self.conversion_date()
+        from_ = self.masking_payment_information(self.from_account)
+        to = self.masking_payment_information(self.to_account)
+
+        return (
+            f"{date} {self.description}\n"
+            f"{from_} -> {to}\n"
+            f"{self.amount} {self.currency_name}\n"
+        )
